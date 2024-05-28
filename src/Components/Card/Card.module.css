@@ -1,9 +1,19 @@
 .cardWrapper {
   width: 280px;
-  height: 210px;
+  height: 160px;
   border: 1px solid grey;
   cursor: pointer;
-  border-radius: 10px;
+  border-radius: 20px;
   margin-bottom: 20px;
-  border-left: 3px solid gray;
+  border-left: 4px solid gray;
+  padding: 10px;
+}
+
+.info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.title {
 }

@@ -5,9 +5,9 @@ import "./index.css";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Signup from "./routes/Signup/Signup.tsx";
-import Main from "./routes/Main/Main.tsx";
 import Signin from "./routes/Signin/index.tsx";
 import Projects from "./routes/Projects/Projects.tsx";
+import Tasks from "./routes/Tasks/Tasks.tsx";
 
 const router = createBrowserRouter([
   {
@@ -19,8 +19,8 @@ const router = createBrowserRouter([
     element: <Signin />,
   },
   {
-    path: "/main",
-    element: <Main />,
+    path: "/tasks/:id",
+    element: <Tasks />,
   },
   {
     path: "/projects",

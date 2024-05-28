@@ -1,0 +1,23 @@
+.wrapper {
+  width: 600px;
+  padding: 14px;
+  margin: 10px;
+  border: 1px solid #bbb;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.id {
+  width: 20px;
+}
+
+.namespace {
+  text-align: center;
+}
+
+.controls {
+  /* width: 20px; */
+}

@@ -1,0 +1,14 @@
+.label {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.help {
+  color: #777;
+  margin-top: 8px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}

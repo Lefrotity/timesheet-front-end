@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import styles from "./Card.module.css";
 import { Button } from "primereact/button";
 import { COLORS, PRIORITY_COLORS } from "../../conts/main";
 import PriorityCard from "../PriorityCard";
 import ProgressBadge from "../ProgressBadge";
+import UpdateTaskModal from "../UpdateTaskModal";
 
 //       id: 0,
 //       title: "string",
@@ -26,8 +27,15 @@ const Card = ({ data }) => {
   const statusColor = COLORS[data.workflow];
   const cardStyle = { borderColor: statusColor };
 
+  const [openModal, setOpenModal] = useState(false);
+
+  const toggleModal = useCallback(() => {
+    setOpenModal((prevState) => !prevState);
+  }, [setOpenModal]);
+
   return (
-    <div className={styles.cardWrapper} style={cardStyle}>
+    <div className={styles.cardWrapper} style={cardStyle} onClick={toggleModal}>
+      <UpdateTaskModal open={openModal} toggle={toggleModal} />
       <div className={styles.shortInfo}>
         <div className={styles.title}>{data.title}</div>
         <br />

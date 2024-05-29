@@ -2,8 +2,13 @@ import React, { useCallback, useMemo } from "react";
 import styles from "./Columns.module.css";
 import Column from "./Column/Column";
 import { WORKFLOW } from "../../conts/main";
+import { useParams } from "react-router-dom";
 
 const Columns = () => {
+  const { id } = useParams();
+
+  console.log("TODO request by id", id);
+
   const tasks = [
     {
       id: 0,

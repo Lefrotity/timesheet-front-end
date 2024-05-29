@@ -2,17 +2,20 @@ import { Button } from "primereact/button";
 import styles from "./ProjectItem.module.css";
 import { OverlayPanel } from "primereact/overlaypanel";
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 const ProjectItem = ({ id, namespace }) => {
   const op = useRef(null);
+  const navigate = useNavigate();
+
+  // no use for useCallback
+  // TODO: create consts for route paths
+  const onItemClick = () => {
+    navigate(`/tasks/${id}`);
+  };
 
   return (
-    <div
-      className={styles.wrapper}
-      onClick={() => {
-        console.log("Go to To do, In progress...");
-      }}
-    >
+    <div className={styles.wrapper} onClick={onItemClick}>
       <div className={styles.id}>
         <b>#{id}</b>
       </div>
@@ -28,7 +31,12 @@ const ProjectItem = ({ id, namespace }) => {
             op.current.toggle(e);
           }}
         />
-        <OverlayPanel ref={op}>
+        <OverlayPanel
+          ref={op}
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+        >
           <Button text label="Редактировать" />
           <Button text severity="danger" label="Удалить" />
         </OverlayPanel>

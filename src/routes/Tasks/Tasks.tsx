@@ -1,13 +1,31 @@
 import styles from "./Tasks.module.css";
 import Columns from "../../Components/Columns";
-import { useParams } from "react-router-dom";
+import Header from "../../Components/Header";
+import { Button } from "primereact/button";
+import { Dialog } from "primereact/dialog";
+import { useCallback, useState } from "react";
+import InputWrapper from "../../Components/InputWrapper";
+import { InputText } from "primereact/inputtext";
+import { InputTextarea } from "primereact/inputtextarea";
+import CreateTaskModal from "../../Components/CreateTaskModal";
 
 function Tasks() {
-  let { id } = useParams();
+  const [openModal, setOpenModal] = useState(false);
+
+  const toggleModal = useCallback(() => {
+    setOpenModal((prevState) => !prevState);
+  }, [setOpenModal]);
 
   return (
     <div className={styles.wrapper}>
-      {id}
+      <CreateTaskModal open={openModal} toggle={toggleModal} />
+      <div className={styles.header}>
+        <Header text="Задачи" />
+      </div>
+      <br />
+      <div className={styles.createBtnWrapper}>
+        <Button label="Создать" onClick={toggleModal} />
+      </div>
       <Columns />
     </div>
   );

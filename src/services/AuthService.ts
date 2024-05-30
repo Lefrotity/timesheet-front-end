@@ -8,21 +8,21 @@ export default class AuthService {
     password: string
   ): Promise<AxiosResponse<AuthResponse>> {
     // probably will change
-    return $api.post<AuthResponse>("/login", { email, password });
+    return $api.post<AuthResponse>("/auth/signin", { email, password });
   }
 
   static async registration(
     email: string,
     password: string,
-    firstName: string,
-    lastName: string
+    firstname: string,
+    lastname: string
   ): Promise<AxiosResponse<AuthResponse>> {
     // probably will change
-    return $api.post<AuthResponse>("/registration", {
+    return $api.post<AuthResponse>("/auth/signup", {
       email,
       password,
-      firstName,
-      lastName,
+      firstname,
+      lastname,
     });
   }
 

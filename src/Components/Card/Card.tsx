@@ -23,7 +23,7 @@ import UpdateTaskModal from "../UpdateTaskModal";
 //       },
 //       workflow: "NEW",
 
-const Card = ({ data }) => {
+const Card = ({ data, updateTask, deleteTask }) => {
   const statusColor = COLORS[data.workflow];
   const cardStyle = { borderColor: statusColor };
 
@@ -35,7 +35,13 @@ const Card = ({ data }) => {
 
   return (
     <div className={styles.cardWrapper} style={cardStyle} onClick={toggleModal}>
-      <UpdateTaskModal open={openModal} toggle={toggleModal} />
+      <UpdateTaskModal
+        task={data}
+        open={openModal}
+        toggle={toggleModal}
+        updateTask={updateTask}
+        deleteTask={deleteTask}
+      />
       <div className={styles.shortInfo}>
         <div className={styles.title}>{data.title}</div>
         <br />

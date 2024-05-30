@@ -2,101 +2,8 @@ import React, { useCallback, useMemo } from "react";
 import styles from "./Columns.module.css";
 import Column from "./Column/Column";
 import { WORKFLOW } from "../../conts/main";
-import { useParams } from "react-router-dom";
 
-const Columns = () => {
-  const { id } = useParams();
-
-  console.log("TODO request by id", id);
-
-  const tasks = [
-    {
-      id: 0,
-      title: "Задача на интеллект",
-      description: "Сложная задача шо капец",
-      priority: "HIGH",
-      deadlineDate: "2024-05-28T13:24:33.682Z",
-      createdDate: "2024-05-28T13:24:33.682Z",
-      closedDate: "2024-05-28T13:24:33.682Z",
-      assignedUser: {
-        id: 0,
-      },
-      project: {
-        id: 0,
-        namespace: "string",
-      },
-      workflow: "NEW",
-    },
-    {
-      id: 1,
-      title: "string",
-      description: "string",
-      priority: "HIGH",
-      deadlineDate: "2024-05-28T13:24:33.682Z",
-      createdDate: "2024-05-28T13:24:33.682Z",
-      closedDate: "2024-05-28T13:24:33.682Z",
-      assignedUser: {
-        id: 0,
-      },
-      project: {
-        id: 0,
-        namespace: "string",
-      },
-      workflow: "TO_DO",
-    },
-    {
-      id: 2,
-      title: "string",
-      description: "string",
-      priority: "HIGH",
-      deadlineDate: "2024-05-28T13:24:33.682Z",
-      createdDate: "2024-05-28T13:24:33.682Z",
-      closedDate: "2024-05-28T13:24:33.682Z",
-      assignedUser: {
-        id: 0,
-      },
-      project: {
-        id: 0,
-        namespace: "string",
-      },
-      workflow: "IN_PROGRESS",
-    },
-    {
-      id: 3,
-      title: "string",
-      description: "string",
-      priority: "HIGH",
-      deadlineDate: "2024-05-28T13:24:33.682Z",
-      createdDate: "2024-05-28T13:24:33.682Z",
-      closedDate: "2024-05-28T13:24:33.682Z",
-      assignedUser: {
-        id: 0,
-      },
-      project: {
-        id: 0,
-        namespace: "string",
-      },
-      workflow: "TEST",
-    },
-    {
-      id: 4,
-      title: "string",
-      description: "string",
-      priority: "HIGH",
-      deadlineDate: "2024-05-28T13:24:33.682Z",
-      createdDate: "2024-05-28T13:24:33.682Z",
-      closedDate: "2024-05-28T13:24:33.682Z",
-      assignedUser: {
-        id: 0,
-      },
-      project: {
-        id: 0,
-        namespace: "string",
-      },
-      workflow: "DONE",
-    },
-  ];
-
+const Columns = ({ tasks, updateTask, deleteTask }) => {
   const toDoCol = useMemo(
     () =>
       tasks.filter(
@@ -123,10 +30,30 @@ const Columns = () => {
 
   return (
     <div className={styles.wrapper}>
-      <Column title="Созданные" tasks={toDoCol} />
-      <Column title="В работе" tasks={inProgressCol} />
-      <Column title="Тестирование" tasks={testingCol} />
-      <Column title="Выполненные" tasks={doneCol} />
+      <Column
+        title="Созданные"
+        tasks={toDoCol}
+        updateTask={updateTask}
+        deleteTask={deleteTask}
+      />
+      <Column
+        title="В работе"
+        tasks={inProgressCol}
+        updateTask={updateTask}
+        deleteTask={deleteTask}
+      />
+      <Column
+        title="Тестирование"
+        tasks={testingCol}
+        updateTask={updateTask}
+        deleteTask={deleteTask}
+      />
+      <Column
+        title="Выполненные"
+        tasks={doneCol}
+        updateTask={updateTask}
+        deleteTask={deleteTask}
+      />
     </div>
   );
 };

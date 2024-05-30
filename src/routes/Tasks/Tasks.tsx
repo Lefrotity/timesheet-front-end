@@ -9,9 +9,15 @@ import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
 import CreateTaskModal from "../../Components/CreateTaskModal";
 import NavBar from "../../Components/NavBar";
+import useTasks from "../../Hooks/useTasks";
+import { useParams } from "react-router-dom";
 
 function Tasks() {
+  const { id } = useParams();
   const [openModal, setOpenModal] = useState(false);
+
+  const { tasks, loading, updateLoading, createTask, updateTask, deleteTask } =
+    useTasks(id);
 
   const toggleModal = useCallback(() => {
     setOpenModal((prevState) => !prevState);
@@ -20,7 +26,12 @@ function Tasks() {
   return (
     <div className={styles.wrapper}>
       <NavBar />
-      <CreateTaskModal open={openModal} toggle={toggleModal} />
+      <CreateTaskModal
+        open={openModal}
+        toggle={toggleModal}
+        createTask={createTask}
+        updateLoading={updateLoading}
+      />
       <div className={styles.header}>
         <Header text="Задачи" />
       </div>
@@ -28,7 +39,8 @@ function Tasks() {
       <div className={styles.createBtnWrapper}>
         <Button label="Создать" onClick={toggleModal} />
       </div>
-      <Columns />
+      <br />
+      <Columns tasks={tasks} updateTask={updateTask} deleteTask={deleteTask} />
     </div>
   );
 }

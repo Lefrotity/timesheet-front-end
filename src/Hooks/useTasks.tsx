@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import $api from "../http";
 
-function useProjects() {
-  const [projects, setProjects] = useState([]);
+function useTasks(id) {
+  const [tasks, setTasks] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [updateLoading, setUpdateLoading] = useState(false);
@@ -10,51 +10,55 @@ function useProjects() {
   useEffect(() => {
     setLoading(true);
     $api
-      .get("/projects")
-      .then((res) => setProjects(res.data.projects))
+      .get(`/tasks?projectId=${id}`)
+      .then((res) => setTasks(res.data.tasks))
       .catch((err) => setError(err))
       .finally(() => setLoading(false));
   }, []);
 
-  const deleteProject = useCallback(
+  const deleteTask = useCallback(
     (id: Number) => {
       setUpdateLoading(true);
 
       $api
-        .delete(`/projects/${id}`)
-        // remove it offline, no need to make GET request
-        .then(() =>
-          setProjects((projects) =>
-            projects.filter((project) => project.id !== id)
-          )
-        )
+        .delete(`/tasks/${id}`)
+        .then(() => setTasks((tasks) => tasks.filter((task) => task.id !== id)))
         .catch((err) => setError(err))
         .finally(() => setUpdateLoading(false));
     },
-    [setProjects]
+    [setTasks]
   );
 
-  const createProject = useCallback(
-    (namespace: String) => {
+  // {
+  //   "id": 0,
+  //   "title": "string",
+  //   "description": "string",
+  //   "priority": "HIGH",
+  //   "deadlineDate": "2024-05-30T08:37:33.223Z",
+  //   "projectId": 0,
+  //   "workflow": "NEW"
+  // }
+  const createTask = useCallback(
+    (data) => {
       setUpdateLoading(true);
 
       $api
-        .post("/projects", { namespace })
-        .then((res) => setProjects((projects) => [...projects, res.data]))
+        .post("/tasks", data)
+        .then((res) => setTasks((tasks) => [...tasks, res.data]))
         .catch((err) => setError(err))
         .finally(() => setUpdateLoading(false));
     },
-    [setProjects]
+    [setTasks]
   );
 
-  const updateProject = useCallback(
+  const updateTask = useCallback(
     (data) => {
       setUpdateLoading(true);
 
       $api
         .put("/projects", data)
         .then((res) =>
-          setProjects((projects) =>
+          setTasks((projects) =>
             projects.map((project) =>
               project.id === res.data.id ? res.data : project
             )
@@ -63,18 +67,18 @@ function useProjects() {
         .catch((err) => setError(err))
         .finally(() => setUpdateLoading(false));
     },
-    [setProjects]
+    [setTasks]
   );
 
   return {
-    projects,
+    tasks,
     error,
     loading,
     updateLoading,
-    deleteProject,
-    createProject,
-    updateProject,
+    deleteTask,
+    createTask,
+    updateTask,
   };
 }
 
-export default useProjects;
+export default useTasks;

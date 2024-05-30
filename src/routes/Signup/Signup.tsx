@@ -5,15 +5,30 @@ import { InputText } from "primereact/inputtext";
 import { Password } from "primereact/password";
 import { Button } from "primereact/button";
 import Header from "../../Components/Header";
+import AuthService from "../../services/AuthService";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
+  const navigate = useNavigate();
   const [firstName, setFirstName] = useState("");
   const [secondName, setSecondName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const onSubmit = () => {
-    console.log("submit");
+  const onSubmit = async () => {
+    try {
+      const res = await AuthService.registration(
+        email,
+        password,
+        firstName,
+        secondName
+      );
+
+      localStorage.setItem("token", res.data.token);
+      navigate("/projects");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (

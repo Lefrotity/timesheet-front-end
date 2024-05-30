@@ -1,0 +1,9 @@
+.header {
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.createBtnWrapper {
+  display: flex;
+  justify-content: center;
+}

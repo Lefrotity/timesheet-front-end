@@ -1,8 +1,12 @@
-import { useState } from "react";
-import "./App.css";
+import styles from "./App.module.css";
+import Columns from "./Components/Columns";
 
 function App() {
-  return <>Hello world</>;
+  return (
+    <div className={styles.wrapper}>
+      <Columns />
+    </div>
+  );
 }
 
 export default App;

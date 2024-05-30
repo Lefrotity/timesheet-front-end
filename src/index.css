@@ -1,0 +1,13 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+}
+
+/* fixing primereact bug, cannot extend field to 100% */
+.p-password {
+  display: block;
+}

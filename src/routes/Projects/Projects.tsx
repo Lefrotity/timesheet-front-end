@@ -2,12 +2,22 @@ import { Button } from "primereact/button";
 import Header from "../../Components/Header";
 import ProjectList from "../../Components/ProjectList";
 import styles from "./Projects.module.css";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Dialog } from "primereact/dialog";
 import InputWrapper from "../../Components/InputWrapper";
 import { InputText } from "primereact/inputtext";
+import useProjects from "../../Hooks/useProjects";
 
 function Projects() {
+  const {
+    projects,
+    loading,
+    updateLoading,
+    createProject,
+    updateProject,
+    deleteProject,
+  } = useProjects();
+
   const [openModal, setOpenModal] = useState(false);
   const [projName, setProjName] = useState("");
 
@@ -15,14 +25,8 @@ function Projects() {
     setOpenModal((prevState) => !prevState);
   }, [setOpenModal]);
 
-  const createProj = () => {
-    console.log("created");
-    toggleModal();
-  };
-
   return (
     <div className={styles.wrapper}>
-      {/* TODO: move on separate component */}
       <Dialog
         header="Создание проекта"
         visible={openModal}
@@ -37,7 +41,13 @@ function Projects() {
 
         <br />
 
-        <Button label="Создать" onClick={createProj} />
+        <Button
+          label="Создать"
+          onClick={() => {
+            createProject(projName);
+            toggleModal();
+          }}
+        />
       </Dialog>
 
       <div className={styles.header}>
@@ -49,7 +59,16 @@ function Projects() {
       </div>
       <br />
       <br />
-      <ProjectList />
+      {loading ? (
+        <div>Loading...</div>
+      ) : (
+        <ProjectList
+          projects={projects}
+          updateProject={updateProject}
+          updateLoading={updateLoading}
+          deleteProject={deleteProject}
+        />
+      )}
     </div>
   );
 }

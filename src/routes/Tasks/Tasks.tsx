@@ -8,6 +8,7 @@ import InputWrapper from "../../Components/InputWrapper";
 import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
 import CreateTaskModal from "../../Components/CreateTaskModal";
+import NavBar from "../../Components/NavBar";
 
 function Tasks() {
   const [openModal, setOpenModal] = useState(false);
@@ -18,6 +19,7 @@ function Tasks() {
 
   return (
     <div className={styles.wrapper}>
+      <NavBar />
       <CreateTaskModal open={openModal} toggle={toggleModal} />
       <div className={styles.header}>
         <Header text="Задачи" />

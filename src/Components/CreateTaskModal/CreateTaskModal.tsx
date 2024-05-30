@@ -48,7 +48,7 @@ const CreateTaskModal = observer(
           />
         </InputWrapper>
         <br />
-        <InputWrapper label="Категория">
+        {/* <InputWrapper label="Категория">
           <Dropdown
             value={selectedTechnoligy}
             options={DROPDOWN_TECHNOLIGIES}
@@ -58,7 +58,7 @@ const CreateTaskModal = observer(
             }}
           />
         </InputWrapper>
-        <br />
+        <br /> */}
         <InputWrapper label="Приоритет">
           <Dropdown
             value={selectedPriority}
@@ -78,7 +78,6 @@ const CreateTaskModal = observer(
             minDate={new Date()}
           />
         </InputWrapper>
-        <p>Дропдаун для пиопле</p>
         <br />
         <div className={styles.createBtnWrapper}>
           <Button

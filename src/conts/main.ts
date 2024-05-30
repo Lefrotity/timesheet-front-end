@@ -25,17 +25,17 @@ export const WORKFLOW = {
 };
 
 export const COLORS = {
-  NEW: "#7d91ad",
-  TO_DO: "#64748b",
-  IN_PROGRESS: "#06b6d4",
-  TEST: "#22c55e",
-  DONE: "#1ba64e",
+  NEW: "#C194FF",
+  TO_DO: "#A666FF",
+  IN_PROGRESS: "#4281FA",
+  TEST: "#33DD96",
+  DONE: "#259B6B",
 };
 
 export const PRIORITY_COLORS = {
-  HIGH: "rgb(238 71 71)",
-  MEDIUM: "#bdb513",
-  LOW: "#2abd13",
+  HIGH: "#d2163d",
+  MEDIUM: "#f05117",
+  LOW: "#2aac16",
 };
 
 export const WORKFLOW_TRANSLATION = {
@@ -45,6 +45,14 @@ export const WORKFLOW_TRANSLATION = {
   TEST: "Тестирование",
   DONE: "Сделана",
 };
+
+export const WORKFLOW_FROPDOWN = [
+  { value: WORKFLOW.NEW, name: WORKFLOW_TRANSLATION.NEW },
+  { value: WORKFLOW.TO_DO, name: WORKFLOW_TRANSLATION.TO_DO },
+  { value: WORKFLOW.IN_PROGRESS, name: WORKFLOW_TRANSLATION.IN_PROGRESS },
+  { value: WORKFLOW.TEST, name: WORKFLOW_TRANSLATION.TEST },
+  { value: WORKFLOW.DONE, name: WORKFLOW_TRANSLATION.DONE },
+];
 
 export const TECHNOLOGIES = {
   CLOUD: "Облако",

@@ -7,6 +7,7 @@ import { Dialog } from "primereact/dialog";
 import InputWrapper from "../../Components/InputWrapper";
 import { InputText } from "primereact/inputtext";
 import useProjects from "../../Hooks/useProjects";
+import NavBar from "../../Components/NavBar";
 
 function Projects() {
   const {
@@ -26,50 +27,54 @@ function Projects() {
   }, [setOpenModal]);
 
   return (
-    <div className={styles.wrapper}>
-      <Dialog
-        header="Создание проекта"
-        visible={openModal}
-        onHide={toggleModal}
-      >
-        <InputWrapper label="Имя проекта">
-          <InputText
-            value={projName}
-            onChange={(e) => setProjName(e.target.value)}
+    <>
+      <NavBar />
+
+      <div className={styles.wrapper}>
+        <Dialog
+          header="Создание проекта"
+          visible={openModal}
+          onHide={toggleModal}
+        >
+          <InputWrapper label="Имя проекта">
+            <InputText
+              value={projName}
+              onChange={(e) => setProjName(e.target.value)}
+            />
+          </InputWrapper>
+
+          <br />
+
+          <Button
+            label="Создать"
+            onClick={() => {
+              createProject(projName);
+              toggleModal();
+            }}
           />
-        </InputWrapper>
+        </Dialog>
 
+        <div className={styles.header}>
+          <Header text="Проекты" />
+        </div>
         <br />
-
-        <Button
-          label="Создать"
-          onClick={() => {
-            createProject(projName);
-            toggleModal();
-          }}
-        />
-      </Dialog>
-
-      <div className={styles.header}>
-        <Header text="Проекты" />
+        <div className={styles.createBtnWrapper}>
+          <Button label="Создать Проект" onClick={toggleModal} />
+        </div>
+        <br />
+        <br />
+        {loading ? (
+          <div>Loading...</div>
+        ) : (
+          <ProjectList
+            projects={projects}
+            updateProject={updateProject}
+            updateLoading={updateLoading}
+            deleteProject={deleteProject}
+          />
+        )}
       </div>
-      <br />
-      <div className={styles.createBtnWrapper}>
-        <Button label="Создать Проект" onClick={toggleModal} />
-      </div>
-      <br />
-      <br />
-      {loading ? (
-        <div>Loading...</div>
-      ) : (
-        <ProjectList
-          projects={projects}
-          updateProject={updateProject}
-          updateLoading={updateLoading}
-          deleteProject={deleteProject}
-        />
-      )}
-    </div>
+    </>
   );
 }
 

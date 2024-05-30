@@ -56,12 +56,10 @@ function useTasks(id) {
       setUpdateLoading(true);
 
       $api
-        .put("/projects", data)
+        .put("/tasks", data)
         .then((res) =>
-          setTasks((projects) =>
-            projects.map((project) =>
-              project.id === res.data.id ? res.data : project
-            )
+          setTasks((tasks) =>
+            tasks.map((task) => (task.id === res.data.id ? res.data : task))
           )
         )
         .catch((err) => setError(err))

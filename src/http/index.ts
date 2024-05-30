@@ -16,4 +16,14 @@ $api.interceptors.request.use((config) => {
   return config;
 });
 
+$api.interceptors.response.use(
+  (config) => {
+    return config;
+  },
+  (error) => {
+    if (error.response.status === 403)
+      window.history.pushState({}, null, "/signin");
+  }
+);
+
 export default $api;

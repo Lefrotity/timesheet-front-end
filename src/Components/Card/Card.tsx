@@ -43,11 +43,22 @@ const Card = ({ data, updateTask, deleteTask }) => {
         deleteTask={deleteTask}
       />
       <div className={styles.shortInfo}>
-        <div className={styles.title}>{data.title}</div>
+        <div className={styles.title}>
+          <b>#{data.id}</b> {data.title}
+        </div>
+        <br />
+        <div className={styles.description}>
+          {data.description || "No description"}
+        </div>
         <br />
         <div className={styles.info}>
           <PriorityCard type={data.priority} />
           <ProgressBadge type={data.workflow} />
+        </div>
+        <div className={styles.deadlineDate}>
+          {new Date(data.deadlineDate)
+            .toLocaleDateString()
+            .replaceAll(".", "/")}
         </div>
       </div>
     </div>

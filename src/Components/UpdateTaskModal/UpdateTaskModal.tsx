@@ -17,7 +17,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 const UpdateTaskModal = observer(
-  ({ task, open, toggle, updateTask, deleteTask }) => {
+  ({ task, open, toggle, updateTask, deleteTask, users }) => {
     const urlParams = useParams();
     const {
       name,
@@ -32,6 +32,8 @@ const UpdateTaskModal = observer(
       changeDeadlineDate,
       workflow,
       changeWorkflow,
+      userId,
+      changeUserId,
     } = updateTaskStore;
 
     useEffect(() => {
@@ -41,6 +43,7 @@ const UpdateTaskModal = observer(
         changePriority(task.priority);
         changeDeadlineDate(new Date(task.deadlineDate));
         changeWorkflow(task.workflow);
+        changeUserId(task.assignedUser.id);
       }
     }, [open]);
 
@@ -102,6 +105,17 @@ const UpdateTaskModal = observer(
           />
         </InputWrapper>
         <br />
+        <InputWrapper label="Исполнитель">
+          <Dropdown
+            value={userId}
+            options={users}
+            optionLabel="name"
+            onChange={(e) => {
+              changeUserId(e.target.value);
+            }}
+          />
+        </InputWrapper>
+        <br />
         <InputWrapper label="Дата сдачи">
           <Calendar
             value={deadlineDate}
@@ -134,6 +148,9 @@ const UpdateTaskModal = observer(
                   deadlineDate: deadlineDate,
                   projectId: +urlParams.id,
                   workflow: workflow,
+                  assignedUser: {
+                    id: userId,
+                  },
                 },
               });
               toggle();

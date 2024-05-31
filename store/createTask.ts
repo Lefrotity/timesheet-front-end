@@ -3,6 +3,7 @@ import { makeAutoObservable } from "mobx";
 class CreateTask {
   name = "";
   description = "";
+  userId = null;
   selectedTechnoligy = null;
   selectedPriority = null;
   deadlineDate = null;
@@ -25,6 +26,10 @@ class CreateTask {
 
   changeDeadlineDate = (value) => {
     this.deadlineDate = value;
+  };
+
+  changeUserId = (value) => {
+    this.userId = value;
   };
 
   constructor() {

@@ -6,13 +6,17 @@ import { InputTextarea } from "primereact/inputtextarea";
 import { observer } from "mobx-react-lite";
 import createTaskStore from "../../../store/createTask";
 import { Dropdown } from "primereact/dropdown";
-import { DROPDOWN_PRIORITIES, DROPDOWN_TECHNOLIGIES } from "../../conts/main";
+import {
+  DROPDOWN_PRIORITIES,
+  DROPDOWN_TECHNOLIGIES,
+  PRIORITY_RAW_NAMES,
+} from "../../conts/main";
 import { Button } from "primereact/button";
 import { Calendar } from "primereact/calendar";
 import { useParams } from "react-router-dom";
 
 const CreateTaskModal = observer(
-  ({ open, toggle, createTask, updateLoading }) => {
+  ({ open, toggle, createTask, updateLoading, users }) => {
     const { id } = useParams();
 
     const {
@@ -26,6 +30,8 @@ const CreateTaskModal = observer(
       changePriority,
       deadlineDate,
       changeDeadlineDate,
+      userId,
+      changeUserId,
     } = createTaskStore;
 
     return (
@@ -70,6 +76,17 @@ const CreateTaskModal = observer(
           />
         </InputWrapper>
         <br />
+        <InputWrapper label="Исполнитель">
+          <Dropdown
+            value={userId}
+            options={users}
+            optionLabel="name"
+            onChange={(e) => {
+              changeUserId(e.target.value);
+            }}
+          />
+        </InputWrapper>
+        <br />
         <InputWrapper label="Дата сдачи">
           <Calendar
             value={deadlineDate}
@@ -85,12 +102,13 @@ const CreateTaskModal = observer(
             label="Создать"
             onClick={() => {
               createTask({
-                title: name,
+                title: name || "No name",
                 description,
-                priority: selectedPriority,
-                deadlineDate: deadlineDate,
+                priority: selectedPriority || PRIORITY_RAW_NAMES.LOW,
+                deadlineDate: deadlineDate || new Date(),
                 projectId: +id,
                 workflow: "NEW",
+                userId: userId || 1,
               });
               toggle();
             }}

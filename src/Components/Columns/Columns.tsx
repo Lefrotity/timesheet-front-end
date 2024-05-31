@@ -3,7 +3,7 @@ import styles from "./Columns.module.css";
 import Column from "./Column/Column";
 import { WORKFLOW } from "../../conts/main";
 
-const Columns = ({ tasks, updateTask, deleteTask }) => {
+const Columns = ({ tasks, updateTask, deleteTask, users }) => {
   const toDoCol = useMemo(
     () =>
       tasks.filter(
@@ -31,24 +31,28 @@ const Columns = ({ tasks, updateTask, deleteTask }) => {
   return (
     <div className={styles.wrapper}>
       <Column
+        users={users}
         title="Созданные"
         tasks={toDoCol}
         updateTask={updateTask}
         deleteTask={deleteTask}
       />
       <Column
+        users={users}
         title="В работе"
         tasks={inProgressCol}
         updateTask={updateTask}
         deleteTask={deleteTask}
       />
       <Column
+        users={users}
         title="Тестирование"
         tasks={testingCol}
         updateTask={updateTask}
         deleteTask={deleteTask}
       />
       <Column
+        users={users}
         title="Выполненные"
         tasks={doneCol}
         updateTask={updateTask}

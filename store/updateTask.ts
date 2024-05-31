@@ -7,6 +7,7 @@ class UpdateTask {
   selectedPriority = null;
   deadlineDate = null;
   workflow = "NEW";
+  userId = "";
 
   changeName = (value) => {
     this.name = value;
@@ -30,6 +31,10 @@ class UpdateTask {
 
   changeWorkflow = (value) => {
     this.workflow = value;
+  };
+
+  changeUserId = (value) => {
+    this.userId = value;
   };
 
   constructor() {
